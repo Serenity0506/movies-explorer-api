@@ -2,6 +2,21 @@ const { celebrate, Joi } = require('celebrate');
 
 const validateUrl = (text) => /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/.test(text);
 
+const signInValidate = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(2),
+  }),
+});
+
+const signUpValidate = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required().min(2),
+    name: Joi.string().min(2).max(30),
+  }),
+});
+
 const userValidate = celebrate({
     body: Joi.object().keys({
       name: Joi.string().required().min(2).max(30),
@@ -45,4 +60,4 @@ const userValidate = celebrate({
   });
   
 
-module.exports = { validateUrl, userValidate, movieValidate, movieByIdValidate };
+module.exports = { validateUrl, userValidate, movieValidate, movieByIdValidate, signInValidate, signUpValidate };

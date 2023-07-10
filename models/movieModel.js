@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 const validator = require('validator');
-const { validateUrl } = require('../../utils/validators');
+const { validateUrl } = require('../utils/validators');
 
 const movieSchema = new Schema({
     country: {

@@ -13,10 +13,14 @@
     "type": "git",
     "url": "git+https://github.com/Serenity0506/movies-explorer-api.git"
   },
-  "author": "",
+  "author": "Liubov Gayduk",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Serenity0506/movies-explorer-api/issues"
   },
-  "homepage": "https://github.com/Serenity0506/movies-explorer-api#readme"
+  "homepage": "https://github.com/Serenity0506/movies-explorer-api#readme",
+  "dependencies": {
+    "celebrate": "^15.0.1",
+    "express": "^4.18.2"
+  }
 }

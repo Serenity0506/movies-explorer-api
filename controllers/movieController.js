@@ -1,8 +1,6 @@
-const { BadRequestError } = require('../errors/BadRequestError');
 const {NotFoundError} = require('../errors/NotFoundError');
 const {UnauthorizedError} = require('../errors/UnauthorizedError');
 const movie = require('../models/movieModel');
-const { ValidationError, CastError } = require('mongoose').Error;
 
 const getMovies = (req, res, next) => {
     movie.find({ owner: req.user._id })
@@ -41,15 +39,7 @@ const postMovie = (req, res, next) => {
     thumbnail, 
     movieId,
     }).then((movie) => res.status(201).send(movie))
-    .catch((err) => {
-      console.log(err);
-      if (err instanceof ValidationError) {
-        return next(
-          new BadRequestError('Переданы некорректные данные'),
-        );
-      }
-      return next(err);
-    });
+    .catch(next);
 }
 
 const deleteMovie = (req, res, next) => {
@@ -62,12 +52,7 @@ const deleteMovie = (req, res, next) => {
         } else {
             movie.deleteOne().then(() => res.send(movie));
         }
-      }).catch((err) => {
-        if (err instanceof CastError) {
-          return next(new BadRequestError('Передан некорректный id фильма'));
-        }
-        return next(err);
-      });
+      }).catch(next);
 };
 
 module.exports = {

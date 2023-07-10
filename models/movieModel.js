@@ -65,3 +65,5 @@ const movieSchema = new Schema({
         type: String,
     },
 });
+
+module.exports = mongoose.model('movie', movieSchema);

@@ -14,7 +14,7 @@ require('dotenv').config();
 
 // console.log(process.env.NODE_ENV);
 
-// mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {});
+mongoose.connect('mongodb://158.160.103.67/bitfilmsdb', {});
 
 app.use(helmet());
 
@@ -22,8 +22,8 @@ const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
   'http://localhost:3005',
-//   'http://mesto.serenity0506.nomoredomains.work',
-//   'https://mesto.serenity0506.nomoredomains.work',
+  'https://api.movies.serenity0506.nomoredomains.work',
+  'http://api.movies.serenity0506.nomoredomains.work',
 ];
 
 app.use((req, res, next) => {

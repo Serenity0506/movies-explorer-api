@@ -12,5 +12,5 @@ Node.js, MongoDB, Express, Helmet, Mongoose, EsLint, Joi, Celebrate, Winston.
 Адрес репозитория: https://github.com/Serenity0506/movies-explorer-api
 
 Ссылки на проект:
-IP
-Backend 
+IP 158.160.103.67
+Backend https://api.movies.serenity0506.nomoredomains.work

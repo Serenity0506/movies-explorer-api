@@ -1,31 +1,29 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const { UnauthenticatedError } = require('../errors/http/UnauthenticatedError');
-
-
+const { UnauthenticatedError } = require('../errors/UnauthenticatedError');
 
 const userSchema = new Schema({
-    name: {
-        required: true,
-        type: String,
-        minlength: 2,
-        maxlength: 30,
+  name: {
+    required: true,
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+  },
+  email: {
+    required: true,
+    type: String,
+    unique: true,
+    validate: {
+      validator: validator.isEmail,
     },
-    email: {
-        required: true,
-        type: String,
-        unique: true,
-        validate: {
-            validator: validator.isEmail,
-          },
-    },
-    password: {
-        required: true,
-        type: String,
-        select: false,
-      },
+  },
+  password: {
+    required: true,
+    type: String,
+    select: false,
+  },
 });
-
 
 userSchema.statics.findUserByCredentials = (email, password) => model('user').findOne({ email }).select('+password')
   .then((user) => {

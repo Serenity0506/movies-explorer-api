@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const usersRouter = require('./usersRouter');
-const movieRouter = require('./movieRouter')
-const authRouter = require('./authRouter');
-const { NotFoundError } = require('../errors/http/NotFoundError');
-const auth = require('../middlewares/authMiddleware');
+const userRouter = require('./userRouters/userRouter');
+const movieRouter = require('./userRouters/movieRouter');
+const authRouter = require('./userRouters/authRouter');
+const { NotFoundError } = require('../errors/NotFoundError');
+const auth = require('../middlewares/authMaddleware');
 
 router.get('/crash-test', () => {
   setTimeout(() => {
@@ -13,7 +13,7 @@ router.get('/crash-test', () => {
 
 router.use(authRouter);
 router.use(auth.checkToken);
-router.use(usersRouter);
+router.use(userRouter);
 router.use(movieRouter);
 
 router.use((req, res, next) => {

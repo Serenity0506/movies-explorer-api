@@ -1,47 +1,42 @@
-const { NotFoundError } = require('../errors/http/NotFoundError');
+const { NotFoundError } = require('../errors/NotFoundError');
 const user = require('../models/userModel');
 
-
 const getUserById = (req, res, next, userId) => {
-    User.findById(userId)
-      .then((user) => {
-        if (!user) {
-          throw new NotFoundError();
-        } else {
-          res.send(user);
-        }
-      })
-      .catch(next);
-  };
+  user.findById(userId)
+    .then((u) => {
+      if (!u) {
+        throw new NotFoundError();
+      } else {
+        res.send(u);
+      }
+    })
+    .catch(next);
+};
 
-  const getUserByIdAuth = (req, res, next) => getUserById(req, res, next, req.user._id);
+const getUserByIdAuth = (req, res, next) => getUserById(req, res, next, req.user._id);
 
-  
-  const updateUser = (req, res, next, userData) => {
-    User.findByIdAndUpdate(
-      req.user._id,
-      userData,
-      { new: true, runValidators: true },
-    )
-      .then((user) => {
-        if (!user) {
-          throw new NotFoundError();
-        } else {
-          res.send(user);
-        }
-      })
-      .catch(next);
-  };
+const updateUser = (req, res, next, userData) => {
+  user.findByIdAndUpdate(
+    req.user._id,
+    userData,
+    { new: true, runValidators: true },
+  )
+    .then((us) => {
+      if (!us) {
+        throw new NotFoundError();
+      } else {
+        res.send(us);
+      }
+    })
+    .catch(next);
+};
 
-  const updateUserNameAndAbout = (req, res, next) => {
-    const { name, about } = req.body;
-    updateUser(req, res, next, { name, about });
-  };
-  
+const updateUserNameAndAbout = (req, res, next) => {
+  const { name, about } = req.body;
+  updateUser(req, res, next, { name, about });
+};
 
-  module.exports = {
-    getUserByIdAuth,
-    updateUserNameAndAbout,
-  };
-  
-  
+module.exports = {
+  getUserByIdAuth,
+  updateUserNameAndAbout,
+};

@@ -3,18 +3,19 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const limiter = require('./middlewares/limiter');
 const allRouters = require('./routes/allRouters');
 const { handleExceptions } = require('./middlewares/errorMiddleware');
 
 const app = express();
 const { requestLogger, errorLogger } = require('./middlewares/loggerMiddleware');
+const { UrlDataBase } = require('./utils/constants');
 
 require('dotenv').config();
 
 // console.log(process.env.NODE_ENV);
 
-mongoose.connect('mongodb://158.160.103.67/bitfilmsdb', {});
+mongoose.connect(UrlDataBase, {});
 
 app.use(helmet());
 
@@ -51,13 +52,6 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
 
 app.use(limiter);
 

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const limiter = require('./middlewares/limiter');
+const { limiter } = require('./middlewares/limiter');
 const allRouters = require('./routes/allRouters');
 const { handleExceptions } = require('./middlewares/errorMiddleware');
 

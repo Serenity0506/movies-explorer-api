@@ -25,6 +25,8 @@ const allowedCors = [
   'http://localhost:3005',
   'https://api.movies.serenity0506.nomoredomains.work',
   'http://api.movies.serenity0506.nomoredomains.work',
+  'https://movies.serenity0506.nomoredomains.work',
+  'http://movies.serenity0506.nomoredomains.work',
 ];
 
 app.use((req, res, next) => {
